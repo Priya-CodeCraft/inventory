@@ -1,0 +1,126 @@
+/* ✅ Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ✅ Set Default Font for the Body */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #F2F2F2, #D1D5DB); /* Light Gray to Soft Steel Blue */
+  color: #2E3944; /* Dark Gray-Blue text */
+}
+
+/* ✅ Use Poppins for Headings & Buttons */
+h1, h2, h3, h4, h5, h6, .button {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ✅ Top Navbar */
+.top-navbar {
+  background: linear-gradient(135deg, #005F73, #0A9396); /* Deep Teal to Vibrant Cyan-Teal */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Navbar Links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+/* ✅ Navbar Items */
+.nav-item {
+  text-decoration: none;
+  padding: 10px 15px;
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 5px;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* ✅ Navbar Icons */
+.nav-item mat-icon {
+  color: white;
+}
+
+/* ✅ Buttons */
+.button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #005F73, #0A9396);
+  color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Input Fields */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #748092; /* Muted Teal */
+  border-radius: 5px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #94A3B8, #64748B); /* Soft Blue-Gray to Charcoal Gray */
+  color: white;
+  outline: none;
+}
+
+/* ✅ Cards */
+.card {
+  background: linear-gradient(135deg, #EAEAEA, #B0BEC5); /* Light Mist Gray to Soft Blue Gray */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Call-to-Action (Hover, Alerts) */
+.cta {
+  background: linear-gradient(135deg, #E63946, #F4A261); /* Soft Red to Warm Peach */
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+  .top-navbar {
+      flex-direction: column;
+      text-align: center;
+  }
+  .nav-links {
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 10px;
+  }
+  .nav-item {
+      padding: 8px;
+  }
+}

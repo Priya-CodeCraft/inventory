@@ -1,0 +1,44 @@
+<!-- Contact Us Section -->
+<div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>Thanks for showing interest in reaching us. Please share your details so we can assist you better.</p>
+
+    <!-- Contact Form -->
+    <mat-card class="contact-form">
+      <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Full Name</mat-label>
+          <input matInput type="text" name="name" [(ngModel)]="contactData.name" required />
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Email Address</mat-label>
+          <input matInput type="email" name="email" [(ngModel)]="contactData.email" required />
+        </mat-form-field>
+        
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput type="tel" name="phone" [(ngModel)]="contactData.phone" />
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Your Message</mat-label>
+          <textarea matInput rows="4" name="message" [(ngModel)]="contactData.message" required></textarea>
+        </mat-form-field>
+        
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">
+          Submit
+        </button>
+      </form>
+    </mat-card>
+
+    <!-- Address Section -->
+    <mat-card class="contact-details">
+      <h3>Reach Us At</h3>
+      <p>No 149, Thiru.vi.ka Industrial Estate, Labour Colony 1st street, Guindy, Chennai - 600032, Tamil Nadu, India.</p>
+      <p><strong>Phone:</strong> +91 9150081257</p>
+      <p><strong>Email:</strong> <a href="mailto:info@instatenders.in">info@instatenders.in</a></p>
+    </mat-card>
+</div>

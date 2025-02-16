@@ -1,0 +1,9 @@
+.footer {
+  width: 100%;
+  background: linear-gradient(135deg, #124E66, #0A9396); /* Very Dark Gray-Blue to Deep Navy Blue */
+  color: white;
+  text-align: center;
+  padding: 8px 0; /* Reduced padding */
+  font-size: 14px; /* Smaller text */
+  font-weight: normal; /* Less bold */
+}

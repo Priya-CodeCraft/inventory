@@ -1,0 +1,22 @@
+<!-- ✅ Show navbar only if 'showNavbar' is true -->
+<mat-toolbar *ngIf="showNavbar" color="primary" class="top-navbar">
+  <span class="menuTitle">InstaTenders</span>
+
+  <div class="nav-links">
+    <a mat-button routerLink="/dashboard" class="nav-item">
+      <mat-icon>dashboard</mat-icon> Dashboard
+    </a>
+    <a mat-button routerLink="/inventory" class="nav-item">
+      <mat-icon>inventory</mat-icon> Inventory
+    </a>
+    <a mat-button routerLink="/contact" class="nav-item">
+      <mat-icon>contact_mail</mat-icon> Contact
+    </a>
+  </div>
+</mat-toolbar>
+
+<!-- ✅ Load Different Pages -->
+<router-outlet></router-outlet>
+
+<!-- ✅ Show footer only if 'showFooter' is true -->
+<app-footer *ngIf="showFooter"></app-footer>

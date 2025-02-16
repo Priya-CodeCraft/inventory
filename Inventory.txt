@@ -1,0 +1,300 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" class="menuIcon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="menuTitle">Home</span>  
+  </mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav [fixedInViewport]="true" [fixedTopGap]="60" #sidenav mode="side" >
+        <div class="side-nav-items">
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/dashboard" class="side-menu-item"><mat-icon>dashboard</mat-icon>Dashboard</a>
+            </div>
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/inventory" class="side-menu-item"><mat-icon>inventory</mat-icon>Inventory</a>
+            </div>
+            <div>
+                <a (click)="sidenav.close()" mat-button routerLink="/settings" class="side-menu-item"><mat-icon>settings</mat-icon>Settings</a> 
+            </div>            
+        </div>         
+    </mat-sidenav>
+    <mat-sidenav-content>     
+        <div class="main-content">
+            <h1>Create Purchase Requisition</h1>
+        </div><br>
+        <div>
+          <mat-stepper>
+            <mat-step label="PR header" ><br><br>
+              <div>
+                <form class="example-form">               
+                  <h5>SUMMARY</h5>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Fill the requirements</mat-label>
+                    <textarea matInput placeholder=""></textarea>
+                  </mat-form-field>
+                </form>
+                </div><br>              
+              <div>              
+                 <div class="row">
+                  <div class="col-6"></div>
+                  <div class="col-6 text-end">
+                    <button class="btn btn-sm btn-success" (click)="addRow()">+ Terms</button>
+                  </div>
+                </div>
+                <div class="pt-2">
+                  <form>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr class="text-uppercase table-dark">
+                          <th scope="col">
+                          <input type="checkbox" name="isCheckAll" [(ngModel)]="isCheckAll" (ngModelChange)="checkAll($event)" />                          
+                          </th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Supplier Name</th>                       
+                          <th scope="col">Delivery Date</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody [formGroup]="employeeForm">
+                        <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                          <tr [formGroupName]="i">
+                            <td scope="row" class="align-middle">                              
+                                <input type="checkbox" formControlName="ischecked" />                              
+                            </td>
+                            <td>
+                              <input type="date" class="form-control" formControlName="Date" placeholder="Date">
+                            </td>
+                            <td>
+                              <input type="text" class="form-control" formControlName="suppliername" placeholder="Name of the Supplier">
+                              <div class="text-danger" *ngIf="getFormControls.controls[i].get('suppliername')?.touched">
+                                <span *ngIf="getFormControls.controls[i].get('suppliername')?.errors?.['required']">Required</span>
+                                <span *ngIf="getFormControls.controls[i].get('suppliername')?.errors?.['minlength']">3 Chars
+                                  Required</span>
+                              </div>
+                            </td>
+                                                        
+                            <td>
+                              <input type="date" class="form-control" formControlName="Delivery Date" placeholder="DeliveryDate">
+                            </td>
+                            <td>
+                              <button class="btn btn-danger"  (click)="removeEmployee(i)">remove</button>
+                            </td>
+                          </tr>
+                        </ng-container>
+                        
+                      </tbody>
+                    </table>
+                  </form>
+                </div>
+                
+              </div>
+              <div>
+                <button mat-button matStepperNext class="step-btn">Save & Next</button>
+              </div>
+            </mat-step>
+            <mat-step label="Items"><br>
+              <p>hai!</p><br>
+              <div>
+                <button mat-button matStepperPrevious class="stepb-btn">Back</button>
+                <button mat-button matStepperNext class="step-btn">Next</button>
+              </div>
+            </mat-step>
+            <mat-step label="Attachments" ><br>
+              <p>hai!</p><br>
+              <div>
+                <button mat-button matStepperPrevious class="stepb-btn">Back</button>
+                <button mat-button matStepperNext class="step-btn">Next</button>
+              </div>
+            </mat-step>
+            <mat-step label="Approver"><br>
+              <p>Nandri vanakkam!</p><br>
+              <div>
+                <button mat-button matStepperNext class="step-btn">Save</button>
+              </div>
+            </mat-step>         
+            
+          </mat-stepper>
+        </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+<router-outlet></router-outlet>
+
+
+
+
+
+
+
+ts
+
+
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent {
+  
+  public employeeForm: FormGroup;
+
+  isCheckAll: boolean = false;
+
+  constructor(private fb: FormBuilder) {
+    this.employeeForm = this.fb.group({
+      tableRows: this.fb.array([],[Validators.required])
+    });
+    this.addRow();
+  }
+
+  createFormGroup(): FormGroup {
+    return this.fb.group({
+      suppliername: ['',[Validators.required,Validators.minLength(3)]],      
+      Date: [''],
+      DeliveryDate: [''],
+      ischecked: [false]
+    });
+  }
+
+  get getFormControls() {
+    const control = this.employeeForm.get('tableRows') as FormArray;
+    return control;
+  }
+
+  addRow() {
+    const control =  this.employeeForm.get('tableRows') as FormArray;
+    control.push(this.createFormGroup());
+  }
+
+
+  checkAll(checkVal: boolean) {
+    
+    this.getFormControls.controls.forEach(formGroup => {
+      formGroup.get('ischecked')?.setValue(checkVal);
+    });
+  }
+  
+
+  removeEmployee(index:number) {
+    const control =  this.employeeForm.get('tableRows') as FormArray;
+    control.removeAt(index);
+  }
+
+}
+
+
+
+
+css
+
+
+.menuTitle{
+    font-size: medium;
+    margin-right: 20px;
+ }
+ .mat-toolbar{
+     height: 60px;
+ }
+ .mat-sidenav{
+     background-color: #3F51B5;
+     width: 160px;
+ }
+ .side-nav-items{
+     display: flexbox;
+     flex-direction: column;
+ }
+ .side-menu-item{
+     color:white !important;
+     margin-top: 20px;
+ }
+ .main-content{
+     margin: 20px;
+ }
+ .step-btn{
+    background-color: #3F51B5;
+    color: white !important;
+    top: 20px;
+}
+.stepb-btn{
+    background-color: #3F51B5;
+    color: white !important;
+    right: 10px;
+    top: 20px;
+}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  table {
+    width: 100%;
+    border: 1px solid black;
+  }
+
+ 
+ app.module.ts
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { SettingsComponent } from './settings/settings.component';
+
+//AngularMaterial
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatTableModule} from '@angular/material/table';
+import {MatInputModule} from '@angular/material/input';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    InventoryComponent,
+    SettingsComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatStepperModule,
+    MatTableModule,
+    MatInputModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+
+
+
+
+
+

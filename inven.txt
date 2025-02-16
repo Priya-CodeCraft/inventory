@@ -1,0 +1,58 @@
+<tbody [formGroup]="employeeForm">
+                        <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                          <tr [formGroupName]="i">
+                          <td scope="row" class="align-middle">                              
+                            <input type="number" />                              
+                          </td>
+                          <td>
+                            <input type="text" class="form-control"  placeholder="Document Name">
+                          </td>
+                          <td><input type="file" id="file">
+                          <label for="file">Upload File</label></td>
+                          <td>
+                          <button class="btn btn-danger"  (click)="removeEmployee(i)">remove</button>
+                          </td></tr>
+                        </ng-container>
+                      </tbody>
+
+label{
+   height:50px;
+   width: 150px;
+ }
+ label:hover{
+   color: red;
+   border: 1px solid red;
+ }
+
+
+
+
+<div>
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Instatenders</mat-card-title>
+                  <mat-card-subtitle>Procurement Solutions & Supply Chain Aggregation</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="assets/images/instalogo.png" alt="Img Of Instatenders">
+                <mat-card-content>
+                  <p>
+                    Procurement process is evolving continuously, 
+                    organizations are working to optimize the buying process and eliminating 
+                    the non-core activities to be more agile and responsive to the stakeholders. 
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button>More Info</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>     
+
+}
+ .example-card {
+    max-width: 400px;
+  }  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/images/instalogo.png');
+    background-size: cover;
+  }

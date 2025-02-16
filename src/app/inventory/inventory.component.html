@@ -1,0 +1,190 @@
+
+<mat-sidenav-container>
+  <mat-sidenav-content>     
+    <div class="main-content">
+      <h1 style="margin-top: 0; padding-top: 0;">Create Purchase Requirements</h1>
+  </div> 
+      <div>
+          <mat-stepper>
+            <mat-step label="PR header" ><br><br>
+              <div class="summary-container">
+                <h5 class="summary-title">SUMMARY</h5>
+                <form class="summary-form">
+                    <mat-form-field class="summary-full-width" appearance="outline">
+                        <mat-label>Fill the requirements</mat-label>
+                        <textarea matInput placeholder=""></textarea>
+                    </mat-form-field>
+                </form>
+            </div>
+                       
+              <div>              
+                 <div class="row">
+                  <div class="col-6"></div>
+                  <div class="col-6 text-end">
+                    <button class="btn btn-sm btn-success" (click)="addRow()">+ Terms</button>
+                  </div>
+                </div>
+                <div class="pt-2">
+                  <form>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr class="text-uppercase table-dark">
+                          <th scope="col"> SI.No </th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Supplier Name</th>                       
+                          <th scope="col">Delivery Date</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody [formGroup]="employeeForm">
+                        <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                          <tr [formGroupName]="i">
+                            <td scope="row" class="align-middle">                              
+                                <input type="number" />                              
+                            </td>
+                            <td>
+                              <input type="date" class="form-control" formControlName="Date" placeholder="Date">
+                            </td>
+                            <td>
+                              <input type="text" class="form-control" formControlName="suppliername" placeholder="Name of the Supplier">
+                              <div class="text-danger" *ngIf="getFormControls.controls[i].get('suppliername')?.touched">
+                                <span *ngIf="getFormControls.controls[i].get('suppliername')?.errors?.['required']">Required</span>
+                                <span *ngIf="getFormControls.controls[i].get('suppliername')?.errors?.['minlength']">3 Chars
+                                  Required</span>
+                              </div>
+                            </td>                                                        
+                            <td>
+                              <input type="date" class="form-control" formControlName="Delivery Date" placeholder="DeliveryDate">
+                            </td>
+                            <td>
+                              <button class="btn btn-danger"  (click)="removeEmployee(i)">remove</button>
+                            </td>
+                          </tr>
+                        </ng-container>                        
+                      </tbody>
+                    </table>
+                  </form>
+                </div>                  
+              </div>
+              <div>
+                <button mat-button matStepperNext class="step-btn">Save & Next</button>
+              </div>
+            </mat-step>
+            <mat-step label="Items"><br>   
+              <div class="row">
+                <div class="col-15"></div>
+                <div class="col-15 text-end">
+                  <button class="btn btn-sm btn-success" (click)="addRow()">+ Terms</button>
+                </div>
+              </div>             
+              <div class="pt-2">
+                <form>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr class="text-uppercase table-dark">
+                        <th scope="col"> SI.No </th>
+                        <th scope="col">Material Code</th>
+                        <th scope="col">Material Description</th>                       
+                        <th scope="col">UoM</th>
+                        <th scope="col">PO Qty</th>
+                        <th scope="col">Inward Qty</th>
+                        <th scope="col">Accepted Qty</th>
+                      </tr>
+                    </thead>
+                    <tbody [formGroup]="employeeForm">
+                      <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                        <tr [formGroupName]="i">
+                          <td scope="row" class="align-middle">                              
+                            <input type="number" />                              
+                          </td>
+                          <td>
+                            <input type="text" class="form-control" placeholder="Material Code">
+                          </td>
+                          <td>
+                            <input type="text" class="form-control" formControlName="suppliername" placeholder="Description for Material">
+                            <div class="text-danger" *ngIf="getFormControls.controls[i].get('suppliername')?.touched">
+                              <span *ngIf="getFormControls.controls[i].get('suppliername')?.errors?.['required']">Required</span>
+                              <span *ngIf="getFormControls.controls[i].get('suppliername')?.errors?.['minlength']">3 Chars
+                                Required</span>
+                            </div>
+                          </td> 
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </form>
+              </div>    
+              <div>
+                <button mat-button matStepperPrevious class="stepb-btn">Previous</button>
+                <button mat-button matStepperNext class="stepn-btn">Next</button>
+              </div>
+            </mat-step>
+            <mat-step label="Attachments" ><br>
+              <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6 text-end">
+                  <button class="btn btn-sm btn-success" (click)="addRow()">+ Terms</button>
+                </div>
+              </div>
+              <div class="pt-2">
+                <form>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr class="text-uppercase table-dark">
+                        <th scope="col"> SI.No </th>
+                        <th scope="col">Name Of the Document</th>
+                        <th scope="col">File Upload</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody [formGroup]="employeeForm">
+                      <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+                        <tr [formGroupName]="i">
+                          <td scope="row" class="align-middle">                              
+                            <input type="number" />                              
+                          </td>
+                          <td>
+                            <input type="text" class="form-control"  placeholder="Document Name">
+                          </td>
+                          <td><input type="file" id="file">
+                          </td>
+                          <td>
+                            <button class="btn btn-danger"  (click)="removeEmployee(i)">remove</button>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+              <div>
+                <button mat-button matStepperPrevious class="stepb-btn">Previous</button>
+                <button mat-button matStepperNext class="stepn-btn">Next</button>
+              </div>
+            </mat-step>
+            <mat-step label="Place Order"><br>
+              <div></div><br>
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Thank You For Purchasing <mat-icon>loyalty</mat-icon> </mat-card-title>
+                  <mat-card-subtitle>Visit Again!</mat-card-subtitle>
+                </mat-card-header>                  
+              </mat-card><br><br>               
+              <div>
+                <button mat-button matStepperPrevious class="stepb-btn">Previous</button>
+                
+                <button mat-stroked-button  class="stepn-btn" matTooltip="To Place Your Order" (click)="openSnackBar()" aria-label="Show an example snack-bar">
+                  Submit
+                </button>
+              </div>
+            </mat-step>        
+            
+          </mat-stepper>
+        </div>       
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<router-outlet></router-outlet>

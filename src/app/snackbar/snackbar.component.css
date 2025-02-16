@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+  }
+
+  .submit-response {
+    color: white;
+    background-color: black;
+    bottom: 20px;
+  }

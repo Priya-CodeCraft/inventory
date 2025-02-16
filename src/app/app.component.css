@@ -1,0 +1,63 @@
+/* ✅ Ensuring Full-Page Layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+router-outlet {
+  flex: 1;
+}
+
+app-footer {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* ✅ Navbar Styles */
+.top-navbar {
+  background: linear-gradient(135deg, #124E66, #0A9396); /* Dark Teal to Vibrant Cyan */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ✅ Navbar Links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+/* ✅ Navbar Items */
+.nav-item {
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+/* ✅ Navbar Icons */
+.nav-item mat-icon {
+  color: white;
+}

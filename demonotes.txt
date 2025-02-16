@@ -1,0 +1,299 @@
+ <mat-stepper>
+                <mat-step label="Step 1" state="phone"><br>
+                  <div>
+                    <table mat-table  class="mat-elevation-z8">
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell > SI.No </th>                          
+                        </ng-container>
+                        <ng-container matColumnDef="Date">
+                          <th mat-header-cell > Date </th>
+                        </ng-container>
+                        <ng-container matColumnDef="Supplier Name">
+                          <th mat-header-cell > Supplier Name </th>
+                        </ng-container>
+                        <ng-container matColumnDef="Delivery Date">
+                          <th mat-header-cell > Delivery Date </th>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell > Action </th>
+                          </ng-container>                        
+                      </table> 
+                  </div><br>
+                  <div>
+                    <button mat-button matStepperNext class="step-btn">Next</button>
+                  </div>
+                </mat-step>
+                <mat-step label="Step 2" state="chat"><br>
+                  <div>
+                    <table mat-table  class="mat-elevation-z8">
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell > SI.No </th>                          
+                        </ng-container>
+                        <ng-container matColumnDef="materialcode">
+                          <th mat-header-cell > Material Code </th>
+                        </ng-container>
+                        <ng-container matColumnDef="materialdescription">
+                          <th mat-header-cell > Material Description </th>
+                        </ng-container>
+                        <ng-container matColumnDef="uom">
+                          <th mat-header-cell > UoM </th>
+                        </ng-container>
+                        <ng-container matColumnDef="poqty">
+                            <th mat-header-cell > PO Qty </th>
+                        </ng-container>
+                        <ng-container matColumnDef="inwardqty">
+                          <th mat-header-cell > Inward Quantity </th>
+                        </ng-container>
+                        <ng-container matColumnDef="acceptedqty">
+                          <th mat-header-cell > Accepted Quantity </th>
+                        </ng-container>
+                        <ng-container matColumnDef="pendingqty">
+                            <th mat-header-cell > Pending PO Quantity </th>
+                        </ng-container> 
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell > Action </th>
+                        </ng-container>                        
+                      </table>                    
+                  </div><br>
+                  <div>
+                    <button mat-button matStepperPrevious class="stepb-btn">Back</button>
+                    <button mat-button matStepperNext class="step-btn">Next</button>
+                  </div>
+                </mat-step>
+                <mat-step label="Step 3"><br>
+                  <div>
+                    <table mat-table  class="mat-elevation-z8">
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell > SI.No </th>                          
+                        </ng-container>
+                        <ng-container matColumnDef="namedoc">
+                          <th mat-header-cell > Name Of the Document </th>
+                        </ng-container>
+                        <ng-container matColumnDef="fileupload">
+                          <th mat-header-cell > File Upload </th>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell > Action </th>
+                          </ng-container>                        
+                      </table> 
+                  </div><br>
+                  <div>
+                    <button mat-button matStepperNext class="step-btn">Save</button>
+                  </div>
+                </mat-step>
+              
+                <!-- Icon overrides. -->
+                <ng-template matStepperIcon="phone">
+                  <mat-icon>call-end</mat-icon>
+                </ng-template>
+                <ng-template matStepperIcon="chat">
+                  <mat-icon>forum</mat-icon>
+                </ng-template>
+              </mat-stepper>
+
+
+
+
+.step-btn{
+    background-color: #3F51B5;
+    color: white !important;
+    top: 20px;
+}
+.stepb-btn{
+    background-color: #3F51B5;
+    color: white !important;
+    right: 10px;
+    top: 20px;
+}
+table {
+    width: 100%;
+    border: 1px solid black;
+}
+
+
+
+
+
+
+
+//u tube table
+
+
+<div class="mt-1 mb-2 p-3 bg-success text-white rounded text-center">
+  <h1>Reusable Components </h1>
+  <h3> Using Input() , Output() </h3>
+</div>
+<app-alert-box [title]="'Error'" [alertType]="'alert-danger'" [content]="'This is sample text'"></app-alert-box>
+<div class="row">
+  <div class="col-6"></div>
+  <div class="col-6 text-end">
+    <button class="btn btn-sm btn-success" (click)="addRow()">Add Employee</button>
+  </div>
+</div>
+<div class="pt-2">
+  <form>
+    <table class="table table-bordered">
+      <thead>
+        <tr class="text-uppercase table-dark">
+          <th scope="col">
+            <input type="checkbox" name="isCheckAll" [(ngModel)]="isCheckAll" (ngModelChange)="checkAll($event)" />
+          </th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Status</th>
+          <th scope="col">City</th>
+          <th scope="col">State</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody [formGroup]="employeeForm">
+        <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls; let i=index">
+          <tr [formGroupName]="i">
+            <td scope="row" class="align-middle">
+              <input type="checkbox" formControlName="ischecked" />
+            </td>
+            <td>
+              <input type="text" class="form-control" formControlName="firstname" placeholder="Enter First">
+              <div class="text-danger" *ngIf="getFormControls.controls[i].get('firstname')?.touched">
+                <span *ngIf="getFormControls.controls[i].get('firstname')?.errors?.['required']">Required</span>
+                <span *ngIf="getFormControls.controls[i].get('firstname')?.errors?.['minlength']">3 Chars
+                  Required</span>
+              </div>
+            </td>
+            <td>
+              <input type="text" class="form-control" formControlName="lastname" placeholder="Enter Last">
+              <div class="text-danger" *ngIf="getFormControls.controls[i].get('lastname')?.touched">
+                <span *ngIf="getFormControls.controls[i].get('lastname')?.errors?.['required']">Required</span>
+              </div>
+            </td>
+            <td>
+              <select formControlName="status" (change)="onStatusChange($event,i)" class="form-control">
+                <option value="">Select Status</option>
+                <option value="active">Active</option>
+                <option value="deactive">De-Active</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" class="form-control" formControlName="city" placeholder="Enter City">
+            </td>
+            <td>
+              <input type="text" class="form-control" formControlName="state" placeholder="Enter state">
+            </td>
+            <td>
+              <button class="btn btn-danger" (click)="removeEmployee(i)">Remove</button>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container>
+          <tr>
+            <td colspan="7">
+              <div class="row">
+                <div class="col-12 text-center">
+                  <button class="btn btn-success" [disabled]="employeeForm.invalid" (click)="onSaveForm()">Save Bulk Employee</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </form>
+</div>
+
+
+//ts
+
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-inline-editing-reactive-form',
+  templateUrl: './inline-editing-reactive-form.component.html',
+  styleUrls: ['./inline-editing-reactive-form.component.css']
+})
+export class InlineEditingReactiveFormComponent {
+
+  public employeeForm: FormGroup;
+
+  isCheckAll: boolean = false;
+
+  constructor(private fb: FormBuilder) {
+    this.employeeForm = this.fb.group({
+      tableRows: this.fb.array([],[Validators.required])
+    });
+    this.addRow();
+  }
+
+  createFormGroup(): FormGroup {
+    return this.fb.group({
+      firstname: ['',[Validators.required,Validators.minLength(3)]],
+      lastname: ['',[Validators.required]],
+      city:[''],
+      state: [''],
+      status: [''],
+      ischecked: [false]
+    });
+  }
+
+  get getFormControls() {
+    const control = this.employeeForm.get('tableRows') as FormArray;
+    return control;
+  }
+
+  addRow() {
+    const control =  this.employeeForm.get('tableRows') as FormArray;
+    control.push(this.createFormGroup());
+  }
+
+  checkAll(checkVal: boolean) {
+    
+    this.getFormControls.controls.forEach(formGroup => {
+      formGroup.get('ischecked')?.setValue(checkVal);
+    });
+  }
+
+  onStatusChange(event:any, index: number) {
+    debugger
+    if(event.target.value == 'deactive'){
+      const control =  this.employeeForm.get('tableRows') as FormArray;
+      control.controls[index].get('state')?.disable();
+      control.controls[index].get('city')?.disable();
+    } else {
+      const control =  this.employeeForm.get('tableRows') as FormArray;
+      control.controls[index].get('state')?.enable();
+      control.controls[index].get('city')?.enable();
+    }
+  }
+
+  removeEmployee(index:number) {
+    const control =  this.employeeForm.get('tableRows') as FormArray;
+    control.removeAt(index);
+  }
+
+  onSaveForm() {
+    const formValue = this.employeeForm.value;
+    
+  }
+}
+
+
+
+    <a mat-button routerLink="/dashboard" class="top-menu-item"><mat-icon>dashboard</mat-icon>Dashboard</a>
+    <a mat-button routerLink="/inventory" class="top-menu-item"><mat-icon>inventory</mat-icon>Inventory</a>
+    <a mat-button routerLink="/settings" class="top-menu-item"><mat-icon>settings</mat-icon>Settings</a>
+
+@media (min-width: 900px){
+     .menuIcon{
+         display: none;
+     }
+     .mat-sidenav{
+         display: none;
+     }
+ }
+
+ @media (max-width: 900px){
+     .top-menu-item{
+         display: none;
+     }
+ }
+
